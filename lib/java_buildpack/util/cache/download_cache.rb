@@ -263,6 +263,7 @@ module JavaBuildpack
             @logger.debug { "Validated content size #{actual_size} is #{expected_size}" }
 
             unless expected_size.to_i == actual_size
+              @logger.debug { cached_file.cached(File::RDONLY) { |f| f.read } }
               cached_file.destroy
               fail InferredNetworkFailure, "Content has invalid size.  Was #{actual_size}, should be #{expected_size}."
             end
