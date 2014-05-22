@@ -29,7 +29,8 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#detect)
       def detect
-        main_class ? JavaMain.to_s.dash_case : nil
+        #main_class ? JavaMain.to_s.dash_case : nil
+        return "main-class"
       end
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
@@ -38,17 +39,17 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#release)
       def release
-        @droplet.additional_libraries.insert 0, @application.root
-        manifest_class_path.each { |path| @droplet.additional_libraries << path }
+        #@droplet.additional_libraries.insert 0, @application.root
+        #manifest_class_path.each { |path| @droplet.additional_libraries << path }
 
-        [
-          port,
-          "#{@droplet.java_home.root}/bin/java",
-          @droplet.additional_libraries.as_classpath,
-          @droplet.java_opts.join(' '),
-          main_class,
-          arguments
-        ].flatten.compact.join(' ')
+        #[
+        #  port,
+        #  "#{@droplet.java_home.root}/bin/java",
+        #  @droplet.additional_libraries.as_classpath,
+        #  @droplet.java_opts.join(' '),
+        #  main_class,
+        #  arguments
+        #].flatten.compact.join(' ')
       end
 
       private
